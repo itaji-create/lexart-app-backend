@@ -11,12 +11,12 @@ const suffix = {
 };
 
 const options = {
-  host: process.env.HOSTNAME || 'localhost',
+  host: process.env.PGHOST || 'localhost',
   port: process.env.PGPORT || '5432',
   database: 
-    `${process.env.DATABASE || 'lexart-database'}${suffix[environment] || suffix.test}`,
-  username: process.env.USER || 'postgres',
-  password: process.env.PASSWORD || '89012345',
+    `${process.env.PGDATABASE || 'lexart-database'}${suffix[environment] || suffix.test}`,
+  username: process.env.PGUSER || 'postgres',
+  password: process.env.PGPASSWORD || '89012345',
   dialect: 'postgres',
   dialectOptions: {
     timezone: 'Z',
