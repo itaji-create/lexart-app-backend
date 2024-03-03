@@ -3,6 +3,17 @@ const md5 = require('md5');
 const jwt = require('jsonwebtoken');
 const fs = require('fs');
 
+const token = (email, password) => {
+  const jwtConfig = {
+    algorithm: 'HS256',
+    expiresIn: '1h',
+  };
+
+  const secret = fs.readFileSync('jwt.evaluation.key').toString();
+  
+  return jwt.sign({ email, password }, secret, jwtConfig);
+};
+
 const getUsers = async () => {
   const users = await User.findAll();
   return users;
@@ -15,18 +26,8 @@ const signIn = async ({ email, password }) => {
     });
   
     if (!user) throw new Error('email or password not found');
-  
+    user.token = token(email, password)
     return user;
-};
-
-const token = async ({ email, role }) => {
-    const jwtConfig = {
-      algorithm: 'HS256',
-      expiresIn: '1h',
-    };
-  
-    const secret = fs.readFileSync('jwt.evaluation.key').toString();
-    return jwt.sign({ email, role }, secret, jwtConfig);
 };
 
 const signUp = async ({ name, email, password }) => {
@@ -49,8 +50,8 @@ const deleteUser = async (id) => {
 
 module.exports = {
   signIn,
-  token,
   signUp,
   deleteUser,
-  getUsers
+  getUsers,
+  token
 }
