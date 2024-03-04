@@ -65,6 +65,7 @@ const deleteProduct = async (id) => {
   const destroyed = await Product.destroy({
     where: { id }
   });
+  if (!destroyed) throw new Error('Produto não encontrado');
   return destroyed;
 };
 
