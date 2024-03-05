@@ -9,6 +9,16 @@ const getProducts = async (req, res) => {
   }
 }
 
+const getProductById = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const product = await productServices.getProductById(id);
+    return res.status(200).json(product);
+  } catch (error) {
+    return res.status(409).json({ message: error.message })
+  }
+}
+
 const createProduct = async (req, res) => {
   try {
     const newProduct = await productServices.createProduct(req.body);
@@ -42,5 +52,6 @@ module.exports = {
   getProducts,
   createProduct,
   deleteProduct,
-  updateProduct
+  updateProduct,
+  getProductById
 };
