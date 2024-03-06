@@ -4,10 +4,12 @@ const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
 const { DATABASE_URL } = process.env;
-const config = require('../config/config.js');
 const db = {};
+const pg = require('pg');
 
-const sequelize = new Sequelize(DATABASE_URL || config);
+const sequelize = new Sequelize(DATABASE_URL, {
+  dialectModule: pg
+});
 
 fs.readdirSync(__dirname)
   .filter(file => file.endsWith('.js') && file !== 'index.js')
