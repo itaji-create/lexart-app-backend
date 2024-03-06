@@ -1,7 +1,6 @@
 const { User } = require('../database/models');
 const md5 = require('md5');
 const jwt = require('jsonwebtoken');
-const fs = require('fs');
 
 const token = (email, password) => {
   const jwtConfig = {
@@ -9,7 +8,7 @@ const token = (email, password) => {
     expiresIn: '1h',
   };
 
-  const secret = fs.readFileSync('jwt.evaluation.key').toString() || 'secret_key';
+  const secret = 'secret_key';
   
   return jwt.sign({ email, password }, secret, jwtConfig);
 };
