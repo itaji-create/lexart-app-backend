@@ -25,17 +25,17 @@ const signIn = async ({ email, password }) => {
       attributes: { exclude: ['password'] },
     });
   
-    if (!user) throw new Error('email or password not found');
+    if (!user) throw new Error('Verifique dados de login e tente novamente!');
     user.token = token(email, password)
     return user;
 };
 
 const signUp = async ({ name, email, password }) => {
     const userEmail = await User.findOne({ where: { email } });
-    if (userEmail) throw new Error('email already exists');
+    if (userEmail) throw new Error('Já existe uma conta com esse email!');
   
     const userName = await User.findOne({ where: { name } });
-    if (userName) throw new Error('name already exists');
+    if (userName) throw new Error('Já existe uma conta com esse nome!');
   
     const newUser = await User.create({ name, email, password: md5(password) });
     return newUser; 
