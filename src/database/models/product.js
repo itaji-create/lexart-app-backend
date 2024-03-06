@@ -27,18 +27,11 @@ module.exports = (sequelize, DataTypes) => {
     color: {
       type: DataTypes.STRING,
       allowNull: false
-    },
-    createdAt: {
-      allowNull: true,
-      type: DataTypes.DATE
-    },
-    updatedAt: {
-      allowNull: true,
-      type: DataTypes.DATE
     }
   },
   {
     underscored: true,
+    timestamps: false,
     tableName: 'Products'
   });
 
