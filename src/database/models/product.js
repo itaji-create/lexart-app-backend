@@ -1,8 +1,6 @@
 'use strict';
 
-const { DataTypes } = require('sequelize');
-
-module.exports = (sequelize) => {
+module.exports = (sequelize, DataTypes) => {
   const Product = sequelize.define('Product', {
     id: {
       allowNull: false,
@@ -38,6 +36,10 @@ module.exports = (sequelize) => {
       allowNull: true,
       type: DataTypes.DATE
     }
+  },
+  {
+    underscored: true,
+    tableName: 'Products'
   });
 
   return Product;
