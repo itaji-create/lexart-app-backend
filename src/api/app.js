@@ -8,6 +8,6 @@ app.use(express.json());
 app.use(cors());
 
 app.get('/', (_req, res) => res.status(200).json("Your coffee Sir"));
-routes(app);
+// routes(app);
 
 module.exports = app;
