@@ -1,8 +1,7 @@
 const jwt = require('jsonwebtoken');
-const fs = require('fs');
 
 const tokenAuthenticador = (req, res, next) => {
-  const secret = fs.readFileSync('jwt.evaluation.key').toString();
+  const secret = 'secret_key';
   const { authorization } = req.headers;
     try {
       if (!authorization) return res.status(401).json({ message: 'Token do not exist' });
