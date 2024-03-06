@@ -10,6 +10,9 @@ const options = {
   dialect: 'postgres',
   dialectOptions: {
     timezone: 'Z',
+    ssl: {
+      require: true,
+    },
   },
   logging: false,
 };
