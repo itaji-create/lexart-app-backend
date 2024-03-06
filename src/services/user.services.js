@@ -9,7 +9,7 @@ const token = (email, password) => {
     expiresIn: '1h',
   };
 
-  const secret = fs.readFileSync('jwt.evaluation.key').toString();
+  const secret = fs.readFileSync('jwt.evaluation.key').toString() || 'secret_key';
   
   return jwt.sign({ email, password }, secret, jwtConfig);
 };
