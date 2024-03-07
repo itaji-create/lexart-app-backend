@@ -10,7 +10,7 @@ const config = require(__dirname + '/../config/config.js');
 
 let sequelize;
 if (DATABASE_URL) {
-  sequelize = new Sequelize(DATABASE_URL || config, {
+  sequelize = new Sequelize(DATABASE_URL, {
     dialectModule: pg
   });
 } else {
