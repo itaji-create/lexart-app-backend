@@ -6,10 +6,17 @@ const Sequelize = require('sequelize');
 const { DATABASE_URL } = process.env;
 const db = {};
 const pg = require('pg');
+const config = require(__dirname + '/../config/config.js');
 
-const sequelize = new Sequelize(DATABASE_URL, {
-  dialectModule: pg
-});
+let sequelize;
+if (DATABASE_URL) {
+  sequelize = new Sequelize(DATABASE_URL || config, {
+    dialectModule: pg
+  });
+} else {
+  sequelize = new Sequelize(config.database, config.username, config.password, config);
+}
+
 
 fs.readdirSync(__dirname)
   .filter(file => file.endsWith('.js') && file !== 'index.js')
